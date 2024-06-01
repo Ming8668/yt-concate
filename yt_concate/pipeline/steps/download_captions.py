@@ -1,3 +1,4 @@
+
 import requests
 import yt_dlp
 
@@ -7,7 +8,7 @@ from .step import Step
 # from .step import StepException
 
 class DownloadCaptions(Step):
-    def process(self, data, inputs):
+    def process(self, data, inputs, utils):
         for url in data:
             # 你要下載的YouTube影片網址
             video_url = url
@@ -36,9 +37,10 @@ class DownloadCaptions(Step):
                 en_caption_convert_to_srt = 'NONE'
 
             # 輸出字幕內容到 Output.txt
-            with open("Output.txt", "w", encoding='utf-8') as text_file:
+            with open(utils.get_caption_path(url), "w", encoding='utf-8') as text_file:
                 text_file.write(en_caption_convert_to_srt)
 
             print(en_caption_convert_to_srt)
 
             break
+
